@@ -9,11 +9,22 @@ terraform {
 }
 
 
-provider "aws" {
-  region     = "eu-west-2"
-  access_key = "AKIAZGKEKWVKQYGCQG6P"
-  secret_key = "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"
+variable "AWS_ACCESS_KEY_ID" {
+  description = "AWS account access key"
+  type        = string
 }
+
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = "AWS account secret key"
+  type        = string
+}
+
+provider "aws" {
+  region     = "us-west-2"
+  access_key = var.AWS_ACCESS_KEY_ID
+  secret_key = var.AWS_SECRET_ACCESS_KEY
+}
+
 
 # Create VPC
 resource "aws_vpc" "my_vpc" {
